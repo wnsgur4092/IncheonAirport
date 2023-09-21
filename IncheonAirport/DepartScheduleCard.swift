@@ -25,24 +25,23 @@ struct DepartScheduleCard: View {
         HStack{
             Text(departTime)
             
-            Spacer()
             
             VStack{
                 Text(destination)
                 Text("(\(cityCode))")
             }
             
-            Spacer()
+   
             
             VStack{
                 Text(flightNumber)
                 Text(airline)
             }
-            
-            Spacer()
+   
             
             Text(gateNumber)
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

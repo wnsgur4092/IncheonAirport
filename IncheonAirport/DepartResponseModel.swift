@@ -25,20 +25,20 @@ struct Body: Codable {
 }
 
 struct FlightItem: Codable,Hashable {
-    let typeOfFlight: String
-    let airline: String
-    let flightId: String
-    let scheduleDateTime: String
-    let estimatedDateTime: String
-    let airport: String
-    let chkinrange: String
-    let gatenumber: String
+    let typeOfFlight: String?
+    let airline: String?
+    let flightId: String?
+    let scheduleDateTime: String?
+    let estimatedDateTime: String?
+    let airport: String?
+    let chkinrange: String?
+    let gatenumber: String?
     let remark: String?
-    let codeshare: String
-    let masterflightid: String
-    let airportCode: String
-    let cityCode: String
-    let terminalId: String
+    let codeshare: String?
+    let masterflightid: String?
+    let airportCode: String?
+    let cityCode: String?
+    let terminalId: String?
     let elapsetime: String?
     let firstopover: String?
     let firstopovername: String?
@@ -62,5 +62,17 @@ struct FlightItem: Codable,Hashable {
     let tenstopovername: String?
 }
 
+extension FlightItem {
+    var terminalName: String {
+        switch terminalId {
+        case "P01", "P02":
+            return "제1터미널"
+        case "P03":
+            return "제2터미널"
+        default:
+            return "전체"
+        }
+    }
+}
 
 
