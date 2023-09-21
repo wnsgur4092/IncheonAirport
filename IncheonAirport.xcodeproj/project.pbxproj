@@ -14,7 +14,6 @@
 		BF5852B22ABADB1100E089BC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BF5852B12ABADB1100E089BC /* Alamofire */; };
 		BF5852B42ABADB3800E089BC /* DepartResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5852B32ABADB3800E089BC /* DepartResponseModel.swift */; };
 		BF5852B62ABADBCD00E089BC /* DepartResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5852B52ABADBCD00E089BC /* DepartResponseViewModel.swift */; };
-		BF5852B92ABADF7400E089BC /* DepartScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5852B82ABADF7400E089BC /* DepartScheduleCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +25,6 @@
 		BF5852B32ABADB3800E089BC /* DepartResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartResponseModel.swift; sourceTree = "<group>"; };
 		BF5852B52ABADBCD00E089BC /* DepartResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartResponseViewModel.swift; sourceTree = "<group>"; };
 		BF5852B72ABADC8000E089BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BF5852B82ABADF7400E089BC /* DepartScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartScheduleCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +60,7 @@
 			children = (
 				BF5852B72ABADC8000E089BC /* Info.plist */,
 				BF5852A22ABADAE600E089BC /* IncheonAirportApp.swift */,
-				BF5852A42ABADAE600E089BC /* ContentView.swift */,
-				BF5852B82ABADF7400E089BC /* DepartScheduleCard.swift */,
+				BFCA69162ABC3BD50040754D /* View */,
 				BF5852B32ABADB3800E089BC /* DepartResponseModel.swift */,
 				BF5852B52ABADBCD00E089BC /* DepartResponseViewModel.swift */,
 				BF5852A62ABADAE700E089BC /* Assets.xcassets */,
@@ -78,6 +75,14 @@
 				BF5852A92ABADAE700E089BC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BFCA69162ABC3BD50040754D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF5852A42ABADAE600E089BC /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +163,6 @@
 			files = (
 				BF5852B42ABADB3800E089BC /* DepartResponseModel.swift in Sources */,
 				BF5852A52ABADAE600E089BC /* ContentView.swift in Sources */,
-				BF5852B92ABADF7400E089BC /* DepartScheduleCard.swift in Sources */,
 				BF5852A32ABADAE600E089BC /* IncheonAirportApp.swift in Sources */,
 				BF5852B62ABADBCD00E089BC /* DepartResponseViewModel.swift in Sources */,
 			);
