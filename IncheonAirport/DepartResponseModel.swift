@@ -62,17 +62,3 @@ struct FlightItem: Codable,Hashable {
     let tenstopovername: String?
 }
 
-extension FlightItem {
-    var terminalName: String {
-        switch terminalId {
-        case "P01", "P02":
-            return "제1터미널"
-        case "P03":
-            return "제2터미널"
-        default:
-            return "전체"
-        }
-    }
-}
-
-

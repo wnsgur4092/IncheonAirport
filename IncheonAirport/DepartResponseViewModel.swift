@@ -9,9 +9,22 @@ import Foundation
 import Alamofire
 
 class DepartResponseViewModel: ObservableObject {
+
     @Published var items: [FlightItem] = []
     @Published var error: String? // For handling and displaying errors
     @Published var isLoading : Bool = true
+    @Published var selectedTerminal: Terminal = .all
+    
+    var filteredItems: [FlightItem] {
+        switch selectedTerminal {
+        case .all:
+            return items
+        case .terminal1:
+            return items.filter { $0.terminalId == "P01" || $0.terminalId == "P02" }
+        case .terminal2:
+            return items.filter { $0.terminalId == "P03" }
+        }
+    }
 
     var serviceKey = "k4jpWaE5PfYiyJ4IsR6NqKeiI3ZjNG8KL0Aw3kH65f8fOmRJIcPFACAdVGbs0yG7wIKFV8KTNXNGhKSrpryQRQ%3D%3D"
 
