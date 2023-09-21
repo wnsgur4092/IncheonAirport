@@ -36,32 +36,43 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    HStack {
-                        Text(selectedTerminal.rawValue)
-                        Button {
-                            withAnimation {
-                                showingSelection.toggle()
-                            }
-                        } label: {
+                    
+                    
+                    
+                    Button {
+                        withAnimation {
+                            showingSelection.toggle()
+                        }
+                    } label: {
+                        HStack{
+                            Text(selectedTerminal.rawValue)
                             Image(systemName: "chevron.down")
                                 .rotationEffect(.degrees(showingSelection ? 180 : 0))
                         }
                     }
+                    
                 }
                 
                 if showingSelection {
                     VStack(spacing: 0) {
                         ForEach(Terminal.allCases, id: \.self) { terminal in
-                            Button {
-                                withAnimation {
-                                    viewModel.selectedTerminal = terminal
-                                    showingSelection = false
+                            VStack{
+                                Button {
+                                    withAnimation {
+                                        viewModel.selectedTerminal = terminal
+                                        showingSelection = false
+                                    }
+                                } label: {
+                                    Text(terminal.rawValue)
+                                        .padding()
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                            } label: {
-                                Text(terminal.rawValue)
-                                    .padding()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Rectangle()
+                                    .fill(.black.opacity(0.2))
+                                    .frame(height: 1)
                             }
+                            
                         }
                     }
                     .background(Color.gray.opacity(0.1))
