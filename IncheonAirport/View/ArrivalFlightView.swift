@@ -1,26 +1,16 @@
 //
-//  ContentView.swift
+//  ArrivalFlightView.swift
 //  IncheonAirport
 //
-//  Created by JunHyuk Lim on 20/9/2023.
+//  Created by JunHyuk Lim on 21/9/2023.
 //
 
 import SwiftUI
 
-enum Terminal: String, CaseIterable, Identifiable {
-    var id: String { self.rawValue }
-    
-    case all = "전체"
-    case terminal1 = "제 1 터미널"
-    case terminal2 = "제 2 터미널"
-}
-
-
-struct ContentView: View {
+struct ArrivalFlightView: View {
     @ObservedObject var viewModel = DepartResponseViewModel()
-    @Binding var selectedTerminal: Terminal
+    @State private var selectedTerminal : Terminal = .all
     @State private var showingSelection: Bool = false
-    
     
     
     var body: some View {
@@ -36,17 +26,21 @@ struct ContentView: View {
                     
                     Spacer()
                     
+                    
+                    
+                    
                     Button {
                         withAnimation {
                             showingSelection.toggle()
                         }
                     } label: {
-                        HStack {
+                        HStack{
                             Text(selectedTerminal.rawValue)
                             Image(systemName: "chevron.down")
                                 .rotationEffect(.degrees(showingSelection ? 180 : 0))
                         }
                     }
+                    
                 }
                 
                 if showingSelection {
@@ -55,7 +49,7 @@ struct ContentView: View {
                             VStack{
                                 Button {
                                     withAnimation {
-                                        selectedTerminal = terminal
+                                        viewModel.selectedTerminal = terminal
                                         showingSelection = false
                                     }
                                 } label: {
@@ -98,9 +92,9 @@ struct ContentView: View {
                             
                             
                             VStack(alignment: .center) {
-                                Text(item.airport ?? "에러")
-                                Text("(\(item.airportCode ?? "에러"))")
-                            }
+                                    Text(item.airport ?? "에러")
+                                    Text("(\(item.airportCode ?? "에러"))")
+                                }
                             .frame(maxWidth:.infinity, alignment: .center)
                             
                             Text(item.airline ?? "에러")
@@ -131,17 +125,9 @@ struct ContentView: View {
     //    }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ArrivalFlightView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(selectedTerminal: .constant(.all))
+        ArrivalFlightView()
     }
 }
 
-
-struct LoadingView: View {
-    var body: some View {
-        VStack {
-            ProgressView()
-        }
-    }
-}

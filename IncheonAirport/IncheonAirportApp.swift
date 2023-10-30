@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct IncheonAirportApp: App {
+    @ObservedObject var viewModel = DepartResponseViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(selectedTerminal: $viewModel.selectedTerminal)
+                .environmentObject(viewModel)
         }
     }
 }

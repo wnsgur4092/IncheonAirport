@@ -26,11 +26,17 @@ class DepartResponseViewModel: ObservableObject {
         }
     }
 
+    var currentDateTime: String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HHmm"
+        return formatter.string(from: date)
+    }
+
     var serviceKey = "k4jpWaE5PfYiyJ4IsR6NqKeiI3ZjNG8KL0Aw3kH65f8fOmRJIcPFACAdVGbs0yG7wIKFV8KTNXNGhKSrpryQRQ%3D%3D"
-    
 
     private var urlString: String {
-    "http://apis.data.go.kr/B551177/StatusOfPassengerFlightsOdp/getPassengerDeparturesOdp?serviceKey=\(serviceKey)&from_time=2300&to_time=2359&lang=K&type=json"
+    "http://apis.data.go.kr/B551177/StatusOfPassengerFlightsOdp/getPassengerDeparturesOdp?serviceKey=\(serviceKey)&from_time=\(currentDateTime)&to_time=2359&lang=K&type=json"
     }
     
     init() {
