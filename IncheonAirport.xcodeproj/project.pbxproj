@@ -17,6 +17,7 @@
 		BF5852B62ABADBCD00E089BC /* DepartResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5852B52ABADBCD00E089BC /* DepartResponseViewModel.swift */; };
 		BF69AD312B1073D8000305CE /* departureFlights.json in Resources */ = {isa = PBXBuildFile; fileRef = BF69AD302B1073D8000305CE /* departureFlights.json */; };
 		BF69AD372B107598000305CE /* DepartureFlightList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69AD362B107598000305CE /* DepartureFlightList.swift */; };
+		BF69AD3D2B1098B2000305CE /* arrivalFlights.json in Resources */ = {isa = PBXBuildFile; fileRef = BF69AD3C2B1098B2000305CE /* arrivalFlights.json */; };
 		BFCA69182ABC4A950040754D /* ArrivalFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA69172ABC4A950040754D /* ArrivalFlightView.swift */; };
 		BFCA691A2ABC4ADD0040754D /* ArrivalResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */; };
 		BFCA691C2ABC4AEF0040754D /* ArrivalResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA691B2ABC4AEF0040754D /* ArrivalResponseModel.swift */; };
@@ -45,6 +46,7 @@
 		BF5852B72ABADC8000E089BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BF69AD302B1073D8000305CE /* departureFlights.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departureFlights.json; sourceTree = "<group>"; };
 		BF69AD362B107598000305CE /* DepartureFlightList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureFlightList.swift; sourceTree = "<group>"; };
+		BF69AD3C2B1098B2000305CE /* arrivalFlights.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = arrivalFlights.json; sourceTree = "<group>"; };
 		BFCA69172ABC4A950040754D /* ArrivalFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalFlightView.swift; sourceTree = "<group>"; };
 		BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalResponseViewModel.swift; sourceTree = "<group>"; };
 		BFCA691B2ABC4AEF0040754D /* ArrivalResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalResponseModel.swift; sourceTree = "<group>"; };
@@ -98,8 +100,7 @@
 				BF5852A42ABADAE600E089BC /* ContentView.swift */,
 				BF69AD3A2B108249000305CE /* API */,
 				BF69AD322B107415000305CE /* DepartureFlight */,
-				BFCA691B2ABC4AEF0040754D /* ArrivalResponseModel.swift */,
-				BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */,
+				BF69AD3B2B109634000305CE /* ArrivalFlight */,
 				BFCA69162ABC3BD50040754D /* View */,
 				BF5852A62ABADAE700E089BC /* Assets.xcassets */,
 				BF5852A82ABADAE700E089BC /* Preview Content */,
@@ -154,8 +155,18 @@
 			isa = PBXGroup;
 			children = (
 				BF69AD302B1073D8000305CE /* departureFlights.json */,
+				BF69AD3C2B1098B2000305CE /* arrivalFlights.json */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		BF69AD3B2B109634000305CE /* ArrivalFlight */ = {
+			isa = PBXGroup;
+			children = (
+				BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */,
+				BFCA691B2ABC4AEF0040754D /* ArrivalResponseModel.swift */,
+			);
+			path = ArrivalFlight;
 			sourceTree = "<group>";
 		};
 		BFCA69162ABC3BD50040754D /* View */ = {
@@ -264,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF5852AA2ABADAE700E089BC /* Preview Assets.xcassets in Resources */,
+				BF69AD3D2B1098B2000305CE /* arrivalFlights.json in Resources */,
 				BF69AD312B1073D8000305CE /* departureFlights.json in Resources */,
 				BF5852A72ABADAE700E089BC /* Assets.xcassets in Resources */,
 			);
