@@ -62,3 +62,14 @@ struct FlightItem: Codable,Hashable {
     let tenstopovername: String?
 }
 
+
+extension FlightItem {
+    static var dummyData: [FlightItem] {
+        let dummyDataURL = Bundle.main.url(forResource: "departureFlights", withExtension: "json")!
+        let data = try! Data(contentsOf: dummyDataURL)
+        
+        let jsonDecoder = JSONDecoder()
+        let apiResponse = try! jsonDecoder.decode(DepartResponseModel.self, from: data)
+        return apiResponse.response.body.items
+    }
+}

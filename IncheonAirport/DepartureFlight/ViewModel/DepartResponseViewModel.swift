@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class DepartResponseViewModel: ObservableObject {
-
+    
     @Published var items: [FlightItem] = []
     @Published var error: String? // For handling and displaying errors
     @Published var isLoading : Bool = true
@@ -25,22 +25,46 @@ class DepartResponseViewModel: ObservableObject {
             return items.filter { $0.terminalId == "P03" }
         }
     }
-
+    
     var currentDateTime: String {
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "HHmm"
         return formatter.string(from: date)
     }
-
+    
     var serviceKey = "k4jpWaE5PfYiyJ4IsR6NqKeiI3ZjNG8KL0Aw3kH65f8fOmRJIcPFACAdVGbs0yG7wIKFV8KTNXNGhKSrpryQRQ%3D%3D"
-
+    
     private var urlString: String {
-    "http://apis.data.go.kr/B551177/StatusOfPassengerFlightsOdp/getPassengerDeparturesOdp?serviceKey=\(serviceKey)&from_time=\(currentDateTime)&to_time=2359&lang=K&type=json"
+        "http://apis.data.go.kr/B551177/StatusOfPassengerFlightsOdp/getPassengerDeparturesOdp?serviceKey=\(serviceKey)&from_time=\(currentDateTime)&to_time=2359&lang=K&type=json"
     }
     
     init() {
-        fetchDepartAirplanes()
+        //        fetchDepartAirplanes()
+        loadDummyData()
+    }
+    
+    func loadDummyData() {
+        guard let url = Bundle.main.url(forResource: "departureFlights", withExtension: "json") else {
+            print("Failed to locate departureFlights.json in bundle.")
+            return
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            print("Failed to load departureFlights.json from bundle.")
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        guard let loadedData = try? decoder.decode(DepartResponseModel.self, from: data) else {
+            print("Failed to decode departureFlights.json.")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.items = loadedData.response.body.items
+            self.isLoading = false
+        }
     }
     
     func fetchDepartAirplanes() {
