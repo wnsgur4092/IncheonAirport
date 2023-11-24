@@ -26,9 +26,6 @@ struct DepartureFlightView: View {
                     
                     Spacer()
                     
-                    
-                    
-                    
                     Button {
                         withAnimation {
                             showingSelection.toggle()
@@ -40,7 +37,6 @@ struct DepartureFlightView: View {
                                 .rotationEffect(.degrees(showingSelection ? 180 : 0))
                         }
                     }
-                    
                 }
                 
                 if showingSelection {
@@ -68,62 +64,21 @@ struct DepartureFlightView: View {
                     .background(Color.gray.opacity(0.1))
                 }
                 
-                HStack(spacing: 10){
-                    ForEach(["출발시간", "목적지","항공사","운항편명", "탑승구"], id:\.self) { type in
-                        Text(type)
-                            .frame(maxWidth: .infinity)
-                            .font(.system(size: 14))
-                    }
-                }
-                .foregroundColor(.black.opacity(0.8))
-                
-                Rectangle()
-                    .fill(.black.opacity(0.2))
-                    .frame(height: 1)
-                
-                ScrollView(showsIndicators: false){
-                    ForEach(viewModel.filteredItems, id:\.self) { item in
-                        HStack(spacing: 10){
-                            VStack{
-                                Text(item.scheduleDateTime ?? "에러")
-                                Text(item.estimatedDateTime ?? "에러")
-                            }
-                            .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            
-                            VStack(alignment: .center) {
-                                    Text(item.airport ?? "에러")
-                                    Text("(\(item.airportCode ?? "에러"))")
-                                }
-                            .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            Text(item.airline ?? "에러")
-                                .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            Text(item.flightId ?? "에러")
-                                .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            Text(item.gatenumber ?? "에러")
-                                .frame(maxWidth:.infinity, alignment: .center)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 10) {
+                        ForEach(viewModel.filteredItems, id: \.self) { item in
+                            DepartureFlightList(flightItem: item)
+                                .padding(.horizontal)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .font(.system(size: 14))
-                        
-                        Rectangle()
-                            .fill(.black.opacity(0.2))
-                            .frame(height: 1)
                     }
-                    
-                }
-                .background{
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(Color.yellow)
                 }
                 
             }
         }
     }
-    //    }
 }
+
 #Preview {
     DepartureFlightView()
 }
