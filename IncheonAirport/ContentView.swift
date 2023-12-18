@@ -13,17 +13,29 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
+            Text("Home VIEW")
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+                .tag(1)
+            
             DepartureFlightView()
                 .tabItem {
                     Label("Departures", systemImage: "airplane.departure")
                 }
-                .tag(1)
+                .tag(2)
 
             ArrivalFlightView()
                 .tabItem {
                     Label("Arrivals", systemImage: "airplane.arrival")
                 }
-                .tag(2)
+                .tag(3)
+            
+            Text("Car Park")
+                .tabItem {
+                    Label("Car Park", systemImage: "car")
+                }
+                .tag(4)
         }
     }
 }

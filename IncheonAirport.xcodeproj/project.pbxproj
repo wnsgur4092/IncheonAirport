@@ -105,7 +105,6 @@
 				BF69AD3A2B108249000305CE /* API */,
 				BF69AD322B107415000305CE /* DepartureFlight */,
 				BF69AD3B2B109634000305CE /* ArrivalFlight */,
-				BFCA69162ABC3BD50040754D /* View */,
 				BF5852A62ABADAE700E089BC /* Assets.xcassets */,
 				BF5852A82ABADAE700E089BC /* Preview Content */,
 			);
@@ -126,6 +125,22 @@
 				BF5A19152B3048D0008266F4 /* DateTimeFormatter.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		BF5A19192B304EAF008266F4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BFCA691B2ABC4AEF0040754D /* ArrivalResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BF5A191A2B304EB8008266F4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		BF69AD322B107415000305CE /* DepartureFlight */ = {
@@ -174,8 +189,9 @@
 		BF69AD3B2B109634000305CE /* ArrivalFlight */ = {
 			isa = PBXGroup;
 			children = (
-				BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */,
-				BFCA691B2ABC4AEF0040754D /* ArrivalResponseModel.swift */,
+				BFCA69162ABC3BD50040754D /* View */,
+				BF5A191A2B304EB8008266F4 /* ViewModel */,
+				BF5A19192B304EAF008266F4 /* Model */,
 			);
 			path = ArrivalFlight;
 			sourceTree = "<group>";
