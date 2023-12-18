@@ -7,78 +7,92 @@
 
 import SwiftUI
 
+enum Terminal: String, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
+    
+    case all = "전체"
+    case terminal1 = "제 1 터미널"
+    case terminal2 = "제 2 터미널"
+}
+
+import SwiftUI
+
 struct DepartureFlightView: View {
     @ObservedObject var viewModel = DepartResponseViewModel()
-    @State private var selectedTerminal : Terminal = .all
-    @State private var showingSelection: Bool = false
-    
+    @State private var selectedTerminal: Terminal = .all
+    @State private var searchText: String = ""
     
     var body: some View {
-        //        if viewModel.isLoading{
-        //            LoadingView()
-        //        } else {
-        
-        VStack{
-            VStack(alignment: .leading){
-                
+        VStack {
+            HeaderView()
+            
+            VStack(alignment: .leading) {
                 HStack {
                     Text("여객 출발시간표")
-                    
                     Spacer()
-                    
-                    Button {
-                        withAnimation {
-                            showingSelection.toggle()
-                        }
-                    } label: {
-                        HStack{
-                            Text(selectedTerminal.rawValue)
-                            Image(systemName: "chevron.down")
-                                .rotationEffect(.degrees(showingSelection ? 180 : 0))
-                        }
-                    }
-                }
-                
-                if showingSelection {
-                    VStack(spacing: 0) {
+                    Picker("Select Terminal", selection: $selectedTerminal) {
                         ForEach(Terminal.allCases, id: \.self) { terminal in
-                            VStack{
-                                Button {
-                                    withAnimation {
-                                        viewModel.selectedTerminal = terminal
-                                        showingSelection = false
-                                    }
-                                } label: {
-                                    Text(terminal.rawValue)
-                                        .padding()
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                                
-                                Rectangle()
-                                    .fill(.black.opacity(0.2))
-                                    .frame(height: 1)
+                            Text(terminal.rawValue).tag(terminal)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                }
+                .padding(.horizontal, 20)
+                
+                HStack {
+                    Text("출발시간")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("목적지")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("항공사")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("운항편명")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .font(.headline)
+                .padding(.horizontal, 20)
+                
+                List(viewModel.filteredItems, id: \.self) { item in
+                    HStack(spacing: 10) {
+                        VStack {
+                            if DateTimeFormatter.formatTime(item.scheduleDateTime) != DateTimeFormatter.formatTime(item.estimatedDateTime) {
+                                Text(DateTimeFormatter.formatTime(item.scheduleDateTime))
+                                    .foregroundColor(Color.red)
+                                    .strikethrough()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                Text(DateTimeFormatter.formatTime(item.estimatedDateTime))
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                            } else {
+                                Text(DateTimeFormatter.formatTime(item.scheduleDateTime))
+                                    .frame(maxWidth: .infinity, alignment: .center)
                             }
-                            
                         }
-                    }
-                    .background(Color.gray.opacity(0.1))
-                }
-                
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 10) {
-                        ForEach(viewModel.filteredItems, id: \.self) { item in
-                            DepartureFlightList(flightItem: item)
-                                .padding(.horizontal)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        VStack(alignment: .center) {
+                            Text(item.airport ?? "에러")
+                            Text("(\(item.cityCode ?? "에러"))")
                         }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        Text(item.airline ?? "에러")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        Text(item.flightId ?? "에러")
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
+                    .font(.system(size: 12))
                 }
-                
+                .listStyle(PlainListStyle())
             }
+        }
+        .onChange(of: selectedTerminal) { newTerminal in
+            viewModel.selectedTerminal = newTerminal
         }
     }
 }
 
-#Preview {
-    DepartureFlightView()
+struct DepartureFlightView_Previews: PreviewProvider {
+    static var previews: some View {
+        DepartureFlightView()
+    }
 }

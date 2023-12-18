@@ -13,8 +13,7 @@ struct IncheonAirportApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(selectedTerminal: $viewModel.selectedTerminal)
-                .environmentObject(viewModel)
+            ContentView()
         }
     }
 }

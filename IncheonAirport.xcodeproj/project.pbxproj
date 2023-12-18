@@ -15,8 +15,9 @@
 		BF5852B22ABADB1100E089BC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BF5852B12ABADB1100E089BC /* Alamofire */; };
 		BF5852B42ABADB3800E089BC /* DepartResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5852B32ABADB3800E089BC /* DepartResponseModel.swift */; };
 		BF5852B62ABADBCD00E089BC /* DepartResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5852B52ABADBCD00E089BC /* DepartResponseViewModel.swift */; };
+		BF5A19162B3048D0008266F4 /* DateTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A19152B3048D0008266F4 /* DateTimeFormatter.swift */; };
+		BF5A19182B3049A5008266F4 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A19172B3049A5008266F4 /* HeaderView.swift */; };
 		BF69AD312B1073D8000305CE /* departureFlights.json in Resources */ = {isa = PBXBuildFile; fileRef = BF69AD302B1073D8000305CE /* departureFlights.json */; };
-		BF69AD372B107598000305CE /* DepartureFlightList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69AD362B107598000305CE /* DepartureFlightList.swift */; };
 		BF69AD3D2B1098B2000305CE /* arrivalFlights.json in Resources */ = {isa = PBXBuildFile; fileRef = BF69AD3C2B1098B2000305CE /* arrivalFlights.json */; };
 		BFCA69182ABC4A950040754D /* ArrivalFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA69172ABC4A950040754D /* ArrivalFlightView.swift */; };
 		BFCA691A2ABC4ADD0040754D /* ArrivalResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */; };
@@ -44,8 +45,9 @@
 		BF5852B32ABADB3800E089BC /* DepartResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartResponseModel.swift; sourceTree = "<group>"; };
 		BF5852B52ABADBCD00E089BC /* DepartResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartResponseViewModel.swift; sourceTree = "<group>"; };
 		BF5852B72ABADC8000E089BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BF5A19152B3048D0008266F4 /* DateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeFormatter.swift; sourceTree = "<group>"; };
+		BF5A19172B3049A5008266F4 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		BF69AD302B1073D8000305CE /* departureFlights.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departureFlights.json; sourceTree = "<group>"; };
-		BF69AD362B107598000305CE /* DepartureFlightList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureFlightList.swift; sourceTree = "<group>"; };
 		BF69AD3C2B1098B2000305CE /* arrivalFlights.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = arrivalFlights.json; sourceTree = "<group>"; };
 		BFCA69172ABC4A950040754D /* ArrivalFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalFlightView.swift; sourceTree = "<group>"; };
 		BFCA69192ABC4ADD0040754D /* ArrivalResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalResponseViewModel.swift; sourceTree = "<group>"; };
@@ -98,6 +100,8 @@
 				BF5852B72ABADC8000E089BC /* Info.plist */,
 				BF5852A22ABADAE600E089BC /* IncheonAirportApp.swift */,
 				BF5852A42ABADAE600E089BC /* ContentView.swift */,
+				BF5A19172B3049A5008266F4 /* HeaderView.swift */,
+				BF5A19142B3048AD008266F4 /* Extension */,
 				BF69AD3A2B108249000305CE /* API */,
 				BF69AD322B107415000305CE /* DepartureFlight */,
 				BF69AD3B2B109634000305CE /* ArrivalFlight */,
@@ -116,6 +120,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		BF5A19142B3048AD008266F4 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BF5A19152B3048D0008266F4 /* DateTimeFormatter.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		BF69AD322B107415000305CE /* DepartureFlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				BF0248332AEF8CB000FCA6E3 /* DepartureFlightView.swift */,
-				BF69AD362B107598000305CE /* DepartureFlightList.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,8 +310,9 @@
 				BF0248342AEF8CB000FCA6E3 /* DepartureFlightView.swift in Sources */,
 				BFCA691A2ABC4ADD0040754D /* ArrivalResponseViewModel.swift in Sources */,
 				BF5852A52ABADAE600E089BC /* ContentView.swift in Sources */,
-				BF69AD372B107598000305CE /* DepartureFlightList.swift in Sources */,
+				BF5A19162B3048D0008266F4 /* DateTimeFormatter.swift in Sources */,
 				BF5852A32ABADAE600E089BC /* IncheonAirportApp.swift in Sources */,
+				BF5A19182B3049A5008266F4 /* HeaderView.swift in Sources */,
 				BF5852B62ABADBCD00E089BC /* DepartResponseViewModel.swift in Sources */,
 				BFCA691C2ABC4AEF0040754D /* ArrivalResponseModel.swift in Sources */,
 				BFCA69182ABC4A950040754D /* ArrivalFlightView.swift in Sources */,

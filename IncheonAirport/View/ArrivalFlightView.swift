@@ -8,121 +8,78 @@
 import SwiftUI
 
 struct ArrivalFlightView: View {
-    @ObservedObject var viewModel = DepartResponseViewModel()
-    @State private var selectedTerminal : Terminal = .all
-    @State private var showingSelection: Bool = false
-    
+    @ObservedObject var viewModel = ArrivalResponseViewModel()
+    @State private var selectedTerminal: Terminal = .all
+    @State private var searchText: String = ""
     
     var body: some View {
-        //        if viewModel.isLoading{
-        //            LoadingView()
-        //        } else {
-        
-        VStack{
-            VStack(alignment: .leading){
+        VStack {
+            HeaderView()
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("여객 도착시간표")
+                    Spacer()
+                    Picker("Select Terminal", selection: $selectedTerminal) {
+                        ForEach(Terminal.allCases, id: \.self) { terminal in
+                            Text(terminal.rawValue).tag(terminal)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                }
+                .padding(.horizontal, 20)
                 
                 HStack {
-                    Text("여객 출발시간표")
-                    
-                    Spacer()
-                    
-                    
-                    
-                    
-                    Button {
-                        withAnimation {
-                            showingSelection.toggle()
-                        }
-                    } label: {
-                        HStack{
-                            Text(selectedTerminal.rawValue)
-                            Image(systemName: "chevron.down")
-                                .rotationEffect(.degrees(showingSelection ? 180 : 0))
-                        }
-                    }
-                    
+                    Text("도착시간")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("출발지")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("항공사")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("운항편명")
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
+                .font(.headline)
+                .padding(.horizontal, 20)
                 
-                if showingSelection {
-                    VStack(spacing: 0) {
-                        ForEach(Terminal.allCases, id: \.self) { terminal in
-                            VStack{
-                                Button {
-                                    withAnimation {
-                                        viewModel.selectedTerminal = terminal
-                                        showingSelection = false
-                                    }
-                                } label: {
-                                    Text(terminal.rawValue)
-                                        .padding()
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                                
-                                Rectangle()
-                                    .fill(.black.opacity(0.2))
-                                    .frame(height: 1)
+                List(viewModel.filteredItems, id: \.self) { item in
+                    HStack(spacing: 10) {
+                        VStack {
+                            if DateTimeFormatter.formatTime(item.scheduleDateTime) != DateTimeFormatter.formatTime(item.estimatedDateTime) {
+                                Text(DateTimeFormatter.formatTime(item.scheduleDateTime))
+                                    .foregroundColor(Color.red)
+                                    .strikethrough()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                Text(DateTimeFormatter.formatTime(item.estimatedDateTime))
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                            } else {
+                                Text(DateTimeFormatter.formatTime(item.scheduleDateTime))
+                                    .frame(maxWidth: .infinity, alignment: .center)
                             }
-                            
                         }
-                    }
-                    .background(Color.gray.opacity(0.1))
-                }
-                
-                HStack(spacing: 10){
-                    ForEach(["출발시간", "목적지","항공사","운항편명", "탑승구"], id:\.self) { type in
-                        Text(type)
-                            .frame(maxWidth: .infinity)
-                            .font(.system(size: 14))
-                    }
-                }
-                .foregroundColor(.black.opacity(0.8))
-                
-                Rectangle()
-                    .fill(.black.opacity(0.2))
-                    .frame(height: 1)
-                
-                ScrollView(showsIndicators: false){
-                    ForEach(viewModel.filteredItems, id:\.self) { item in
-                        HStack(spacing: 10){
-                            VStack{
-                                Text(item.scheduleDateTime ?? "에러")
-                                Text(item.estimatedDateTime ?? "에러")
-                            }
-                            .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            
-                            VStack(alignment: .center) {
-                                    Text(item.airport ?? "에러")
-                                    Text("(\(item.airportCode ?? "에러"))")
-                                }
-                            .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            Text(item.airline ?? "에러")
-                                .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            Text(item.flightId ?? "에러")
-                                .frame(maxWidth:.infinity, alignment: .center)
-                            
-                            Text(item.gatenumber ?? "에러")
-                                .frame(maxWidth:.infinity, alignment: .center)
-                        }
-                        .font(.system(size: 14))
+                        .frame(maxWidth: .infinity, alignment: .center)
                         
-                        Rectangle()
-                            .fill(.black.opacity(0.2))
-                            .frame(height: 1)
+                        VStack(alignment: .center) {
+                            Text(item.airport ?? "에러")
+                            Text("(\(item.airportCode ?? "에러"))")
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        Text(item.airline ?? "에러")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        Text(item.flightId ?? "에러")
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    
+                    .font(.system(size: 12))
                 }
-                .background{
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(Color.yellow)
-                }
-                
+                .listStyle(PlainListStyle())
             }
         }
+        .onChange(of: selectedTerminal) { newTerminal in
+            viewModel.selectedTerminal = newTerminal
+        }
     }
-    //    }
 }
 
 struct ArrivalFlightView_Previews: PreviewProvider {
@@ -131,3 +88,47 @@ struct ArrivalFlightView_Previews: PreviewProvider {
     }
 }
 
+
+struct SearchBar: View {
+    @Binding var text: String
+    var onSearch: () -> Void
+    
+    var body: some View {
+        HStack {
+            TextField("Search...", text: $text)
+                .padding(7)
+                .padding(.horizontal, 25)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .overlay(
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 8)
+                        
+                        if !text.isEmpty {
+                            Button(action: {
+                                self.text = ""
+                            }) {
+                                Image(systemName: "multiply.circle.fill")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 8)
+                            }
+                        }
+                    }
+                )
+                .onSubmit(onSearch)
+                .submitLabel(.search)
+            
+            if !text.isEmpty {
+                Button("Cancel") {
+                    self.text = ""
+                    onSearch()
+                }
+                .foregroundColor(.blue)
+            }
+        }
+        .padding(.horizontal, 10)
+    }
+}

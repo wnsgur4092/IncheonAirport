@@ -22,7 +22,6 @@ class ArrivalResponseViewModel: ObservableObject {
             return items.filter { $0.terminalId == "P01" }
         case .terminal2:
             return items.filter { $0.terminalId == "P02" }
-        // Adjust the filtering logic based on your terminal logic
         }
     }
 

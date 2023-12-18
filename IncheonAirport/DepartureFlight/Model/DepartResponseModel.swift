@@ -21,10 +21,10 @@ struct Header: Codable {
 }
 
 struct Body: Codable {
-    let items: [FlightItem]
+    let items: [DepartureItem]
 }
 
-struct FlightItem: Codable,Hashable {
+struct DepartureItem: Codable,Hashable {
     let typeOfFlight: String?
     let airline: String?
     let flightId: String?
@@ -63,8 +63,8 @@ struct FlightItem: Codable,Hashable {
 }
 
 
-extension FlightItem {
-    static var dummyData: [FlightItem] {
+extension DepartureItem {
+    static var dummyData: [DepartureItem] {
         let dummyDataURL = Bundle.main.url(forResource: "departureFlights", withExtension: "json")!
         let data = try! Data(contentsOf: dummyDataURL)
         
